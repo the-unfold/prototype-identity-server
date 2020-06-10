@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Vladimir\.nuget\packages\;C:\Program Files\dotnet\sdk\NuGetFallbackFolder</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.5.0</NuGetToolVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_EntityFrameworkCore Condition=" '$(PkgMicrosoft_EntityFrameworkCore)' == '' ">C:\Users\Vladimir\.nuget\packages\microsoft.entityframeworkcore\3.1.4</PkgMicrosoft_EntityFrameworkCore>
+    <PkgMicrosoft_EntityFrameworkCore_InMemory Condition=" '$(PkgMicrosoft_EntityFrameworkCore_InMemory)' == '' ">C:\Users\Vladimir\.nuget\packages\microsoft.entityframeworkcore.inmemory\3.1.4</PkgMicrosoft_EntityFrameworkCore_InMemory>
+    <PkgMicrosoft_AspNetCore_Identity_EntityFrameworkCore Condition=" '$(PkgMicrosoft_AspNetCore_Identity_EntityFrameworkCore)' == '' ">C:\Users\Vladimir\.nuget\packages\microsoft.aspnetcore.identity.entityframeworkcore\3.1.4</PkgMicrosoft_AspNetCore_Identity_EntityFrameworkCore>
+    <PkgMicrosoft_AspNetCore_Identity Condition=" '$(PkgMicrosoft_AspNetCore_Identity)' == '' ">C:\Users\Vladimir\.nuget\packages\microsoft.aspnetcore.identity\2.2.0</PkgMicrosoft_AspNetCore_Identity>
+    <PkgIdentityModel Condition=" '$(PkgIdentityModel)' == '' ">C:\Users\Vladimir\.nuget\packages\identitymodel\4.3.0</PkgIdentityModel>
+    <PkgIdentityServer4 Condition=" '$(PkgIdentityServer4)' == '' ">C:\Users\Vladimir\.nuget\packages\identityserver4\3.1.3</PkgIdentityServer4>
+    <PkgIdentityServer4_AspNetIdentity Condition=" '$(PkgIdentityServer4_AspNetIdentity)' == '' ">C:\Users\Vladimir\.nuget\packages\identityserver4.aspnetidentity\3.1.3</PkgIdentityServer4_AspNetIdentity>
+    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\Vladimir\.nuget\packages\fsharp.core\4.7.0</PkgFSharp_Core>
+  </PropertyGroup>
+</Project>
