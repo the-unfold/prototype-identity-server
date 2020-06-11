@@ -4,19 +4,16 @@
     <RootNamespace>AuthWebApi</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="WeatherForecast.fs"/>
     <Compile Include="Configuration.fs"/>
     <Compile Include="ProfileService.fs"/> 
     <Compile Include="Data/ApplicationDbContext.fs"/>
-    <Compile Include="Controllers/WeatherForecastController.fs"/>
     <Compile Include="Controllers/AuthController.fs"/>
-    <Compile Include="Startup.fs"/>
     <Compile Include="Program.fs"/>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="4.3.0"/>
     <PackageReference Include="IdentityServer4" Version="3.1.3"/>
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="3.1.3"/>
-    <PackageReference Include="IdentityModel" Version="4.3.0"/>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0"/>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4"/>

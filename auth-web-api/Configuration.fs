@@ -6,28 +6,22 @@ open IdentityServer4.Models
 
 module Configuration =
 
-    let GetClients () =
+    let getClients () =
         [ 
             Client(
-                ClientName = "client_name",
                 ClientId = "client_id",
-                ClientSecrets = [| Secret("client_secret".ToSha256())|],
-                Enabled = true,
-                AccessTokenType = AccessTokenType.Jwt,
-                AllowedScopes = [|
-                    IdentityServerConstants.StandardScopes.OpenId
-                    IdentityServerConstants.StandardScopes.Profile
-                |],
-                AllowedGrantTypes = GrantTypes.ClientCredentials
+                ClientSecrets = [|Secret ("client_secret".ToSha256()) |],
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedScopes = [| "api" |]
             )
         ]
 
-    let GetApiResources() =
+    let getApiResources() =
         [
             ApiResource("api")
         ]
 
-    let GetIdentityResources() =
+    let getIdentityResources() =
         [
             IdentityResources.OpenId () :> IdentityResource
             IdentityResources.Profile () :> IdentityResource

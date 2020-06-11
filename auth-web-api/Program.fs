@@ -1,26 +1,47 @@
 namespace AuthWebApi
 
 open System
-open System.Collections.Generic
-open System.IO
-open System.Linq
-open System.Threading.Tasks
-open Microsoft.AspNetCore
+open Microsoft.AspNetCore.Builder
+open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.AspNetCore.Hosting
-open Microsoft.Extensions.Configuration
-open Microsoft.Extensions.Hosting
+open Microsoft.AspNetCore.Identity
 open Microsoft.Extensions.Logging
+open Microsoft.Extensions.Hosting
+open Microsoft.Extensions.DependencyInjection
+
+open AuthWebApi.Data
+open AuthWebApi.Configuration
 
 module Program =
-    let CreateHostBuilder args =
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(fun webBuilder ->
-                webBuilder.UseStartup<Startup>() |> ignore
-            )
+    let configureServices (services: IServiceCollection): unit =
+        services.AddIdentityServer()
+            .AddInMemoryClients(getClients ())
+            .AddInMemoryApiResources(getApiResources ()) 
+            .AddInMemoryIdentityResources(getIdentityResources ())
+            .AddDeveloperSigningCredential() |> ignore
+            
+        services.AddControllers () |> ignore
+
+    let configureApp (context: WebHostBuilderContext) (app: IApplicationBuilder): unit =
+        if context.HostingEnvironment.IsDevelopment ()
+        then app.UseDeveloperExceptionPage () |> ignore
+
+        app.UseRouting() |> ignore
+
+        app.UseIdentityServer() |> ignore
+
+        app.UseEndpoints(fun endpoints -> 
+            endpoints.MapControllers () |> ignore
+        ) |> ignore
 
     [<EntryPoint>]
     let main args =
-        let host = CreateHostBuilder(args).Build()
-        use scope = host.Services.CreateScope()
-        host.Run()
+        Host.CreateDefaultBuilder(args)        
+            .ConfigureWebHostDefaults(fun webBuilder -> 
+                webBuilder
+                    .Configure(configureApp)
+                    .ConfigureServices(configureServices) |> ignore)
+            .Build()
+            .Run()
+
         0
