@@ -4,11 +4,15 @@ open System
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.AspNetCore.Hosting
+open Microsoft.AspNetCore.Authentication.JwtBearer
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open Api.HttpHandlers
+
+let authorize : HttpHandler =
+    requiresAuthentication (challenge JwtBearerDefaults.AuthenticationScheme)
 
 // ---------------------------------
 // Web app
@@ -20,8 +24,12 @@ let webApp =
             (choose [
                 GET >=> choose [
                     route "/hello" >=> handleGetHello
-                    route "/user" >=> handleGetUser
+                 
                 ]
+                authorize >=>
+                    GET >=> choose [
+                        route "/user" >=> handleGetUser
+                    ]
             ])
         setStatusCode 404 >=> text "Not Found" ]
 
@@ -38,12 +46,18 @@ let errorHandler (ex : Exception) (logger : ILogger) =
 // ---------------------------------
 
 let configureServices (services: IServiceCollection) =
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, (fun config ->
+            config.Authority <- "https://localhost:6001"
+            config.Audience <- "api")
+        ) |> ignore
     services.AddGiraffe() |> ignore
 
 let configureApp (app: IApplicationBuilder) =
     // app.UseAuthentication () |> ignore
     // app.UseAuthorization() |> ignore
-    app.UseGiraffe webApp
+    app.UseAuthentication()
+        .UseGiraffe webApp
 
 let configureCors (builder : CorsPolicyBuilder) =
     builder.WithOrigins("http://localhost:8080")
